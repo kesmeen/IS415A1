@@ -1,0 +1,25 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+                                                                                
+"features": [
+{ "type": "Feature", "properties": { "name": "ANG MO KIO POLYCLINIC", "Postal": 560723, "Address": "723 Ang Mo Kio Ave 8 #1-4136", "X-COORDINATES": 1.372576, "Y-COORDINATES": 103.847232 }, "geometry": { "type": "Point", "coordinates": [ 103.847232, 1.372576 ] } },
+{ "type": "Feature", "properties": { "name": "BEDOK POLYCLINIC", "Postal": 460212, "Address": "212 Bedok North Street 1 #3-147", "X-COORDINATES": 1.325906, "Y-COORDINATES": 103.931513 }, "geometry": { "type": "Point", "coordinates": [ 103.931513, 1.325906 ] } },
+{ "type": "Feature", "properties": { "name": "BUKIT BATOK POLYCLINIC", "Postal": 659164, "Address": "50 Bukit Batok West Ave 3", "X-COORDINATES": 1.351972, "Y-COORDINATES": 103.747924 }, "geometry": { "type": "Point", "coordinates": [ 103.747924, 1.351972 ] } },
+{ "type": "Feature", "properties": { "name": "BUKIT MERAH POLYCLINIC", "Postal": 150163, "Address": "163 Bukit Merah Central #4-3565", "X-COORDINATES": 1.283875, "Y-COORDINATES": 103.816899 }, "geometry": { "type": "Point", "coordinates": [ 103.816899, 1.283875 ] } },
+{ "type": "Feature", "properties": { "name": "CHOA CHU KANG POLYCLINIC", "Postal": 688846, "Address": "2 Teck Whye Crescent ", "X-COORDINATES": 1.382301, "Y-COORDINATES": 103.750669 }, "geometry": { "type": "Point", "coordinates": [ 103.750669, 1.382301 ] } },
+{ "type": "Feature", "properties": { "name": "CLEMENTI POLYCLINIC", "Postal": 120451, "Address": "451 Clementi Avenue 3 #2-307", "X-COORDINATES": 1.312638, "Y-COORDINATES": 103.765669 }, "geometry": { "type": "Point", "coordinates": [ 103.765669, 1.312638 ] } },
+{ "type": "Feature", "properties": { "name": "GEYLANG POLYCLINIC", "Postal": 389707, "Address": "21 Geylang East Central", "X-COORDINATES": 1.319476, "Y-COORDINATES": 103.887157 }, "geometry": { "type": "Point", "coordinates": [ 103.887157, 1.319476 ] } },
+{ "type": "Feature", "properties": { "name": "HOUGANG POLYCLINIC", "Postal": 538829, "Address": "89 Hougang Avenue 4", "X-COORDINATES": 1.370032, "Y-COORDINATES": 103.889024 }, "geometry": { "type": "Point", "coordinates": [ 103.889024, 1.370032 ] } },
+{ "type": "Feature", "properties": { "name": "JURONG POLYCLINIC", "Postal": 609788, "Address": "190 Jurong East Avenue 1", "X-COORDINATES": 1.349792, "Y-COORDINATES": 103.730619 }, "geometry": { "type": "Point", "coordinates": [ 103.730619, 1.349792 ] } },
+{ "type": "Feature", "properties": { "name": "MARINE PARADE POLYCLINIC", "Postal": 440080, "Address": "80 Marine Parade Central #1-792", "X-COORDINATES": 1.302256, "Y-COORDINATES": 103.907597 }, "geometry": { "type": "Point", "coordinates": [ 103.907597, 1.302256 ] } },
+{ "type": "Feature", "properties": { "name": "OUTRAM POLYCLINIC", "Postal": 168937, "Address": "3 Health Promotion Board Building #2", "X-COORDINATES": 1.279555, "Y-COORDINATES": 103.838369 }, "geometry": { "type": "Point", "coordinates": [ 103.838369, 1.279555 ] } },
+{ "type": "Feature", "properties": { "name": "PASIR RIS POLYCLINIC", "Postal": 519457, "Address": "1 Pasir Ris Drive 4 #1-11", "X-COORDINATES": 1.368309, "Y-COORDINATES": 103.959529 }, "geometry": { "type": "Point", "coordinates": [ 103.959529, 1.368309 ] } },
+{ "type": "Feature", "properties": { "name": "QUEENSTOWN POLYCLINIC", "Postal": 148958, "Address": "580 Stirling Road", "X-COORDINATES": 1.298484, "Y-COORDINATES": 103.800959 }, "geometry": { "type": "Point", "coordinates": [ 103.800959, 1.298484 ] } },
+{ "type": "Feature", "properties": { "name": "SENGKANG POLYCLINIC", "Postal": 545025, "Address": "2 Sengkang Square #1-6", "X-COORDINATES": 1.392501, "Y-COORDINATES": 103.894364 }, "geometry": { "type": "Point", "coordinates": [ 103.894364, 1.392501 ] } },
+{ "type": "Feature", "properties": { "name": "TAMPINES POLYCLINIC", "Postal": 529203, "Address": "1 Tampines Street 41", "X-COORDINATES": 1.357257, "Y-COORDINATES": 103.946039 }, "geometry": { "type": "Point", "coordinates": [ 103.946039, 1.357257 ] } },
+{ "type": "Feature", "properties": { "name": "TOA PAYOH POLYCLINIC", "Postal": 319260, "Address": "2003 Toa Payoh Lorong 8", "X-COORDINATES": 1.334550, "Y-COORDINATES": 103.858986 }, "geometry": { "type": "Point", "coordinates": [ 103.858986, 1.334550 ] } },
+{ "type": "Feature", "properties": { "name": "WOODLANDS POLYCLINIC", "Postal": 738579, "Address": "10 Woodlands Street 31", "X-COORDINATES": 1.430806, "Y-COORDINATES": 103.775072 }, "geometry": { "type": "Point", "coordinates": [ 103.775072, 1.430806 ] } },
+{ "type": "Feature", "properties": { "name": "YISHUN POLYCLINIC", "Postal": 768796, "Address": "30A Yishun Central 1", "X-COORDINATES": 1.426651, "Y-COORDINATES": 103.838163 }, "geometry": { "type": "Point", "coordinates": [ 103.838163, 1.426651 ] } }
+]
+}

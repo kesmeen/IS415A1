@@ -1,0 +1,249 @@
+<html>
+<head>
+  <title>IS415 A1</title>  
+  	<script src="js/leaflet.js"></script>
+  	<link rel="stylesheet" href="css/leaflet.css"/>
+	
+	<script src="js/leaflet.markercluster.js"></script>
+	<link rel="stylesheet" href="css/MarkerCluster.css"/>
+
+  	<script src="js/leaflet_awesome_markers.js"></script>
+  	<link rel="stylesheet" href="css/leaflet_awesome_markers.css">
+
+	<script src="js/jquery-2.1.1.min.js"></script>
+ 	 
+	<link href="lib/font-awesome-4.5.0/css/font-awesome.css" rel="stylesheet">
+
+ 
+  <style>
+
+  
+
+	#map {
+  		height: 100%;
+  		width: 100%;
+	}
+
+	.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+	}
+
+	.legend {
+    line-height: 18px;
+    color: #555;
+	}
+	.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+	}
+    
+	</style>
+</head>
+<body>
+
+  <div id="map"></div>
+
+
+  <script>
+  
+	var map = L.map('map').setView([1.35, 103.7968], 11);
+
+
+	var openstreetmap = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+        attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+        subdomain: ['a', 'b', 'c'],
+        minZoom: 11
+    });
+
+	var dataview = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+    minZoom: 11
+	});
+	dataview.addTo(map);
+
+
+
+    /**********************
+          Info 
+    ***********************/
+    var info = L.control();
+
+    info.onAdd = function (map) {
+      this._div = L.DomUtil.create('div', 'info');
+      this.update();
+      return this._div;
+    };
+
+    info.update = function (props) {
+      this._div.innerHTML = '<strong>'+ (props ?
+        props.Subzone + '</strong>'+'<br/><b>' + props.TotalPopulation + '</b> Residents <br/>'
+        : 'Hover over a subzone for population info');
+    };
+
+
+    /**********************
+          Markers
+    ***********************/
+
+    
+
+    var cervicalIcon = L.AwesomeMarkers.icon({
+    	icon: 'medkit',
+    	markerColor: 'black',
+    	prefix: 'fa'
+    });
+    /**********************
+    Cervical Screening Centre
+    ***********************/
+
+
+    
+
+
+var cervicalLayer = L.layerGroup();
+$.getJSON("./data/cervical.geojson", function (data) {
+    cervicalLayer.addLayer(L.geoJson(data, {
+      onEachFeature: function (feature, layer) {
+          layer.bindPopup('<strong>'+ feature.properties.name+'</strong>' + '<br/>' + feature.properties.Address 
+            + '<br/>' + feature.properties.Postal);
+      },
+      pointToLayer: function(feature, latlng) {
+        return L.marker(latlng, {icon: cervicalIcon});
+      }
+    }));
+   
+  });
+
+
+
+
+
+    /**********************
+        Subzone 
+    ***********************/
+
+    var subzoneJSON;
+    var colorArray = [0,6930,21990,44800,85930];
+    var colorScheme1 = ['#f1eef6','#d7b5d8','#df65b0','#dd1c77','#980043'];
+    function getColor(d) {
+      return d < colorArray[1] ? colorScheme1[0]:
+             d < colorArray[2]  ? colorScheme1[1] :
+             d < colorArray[3]  ? colorScheme1[2] :
+             d < colorArray[4]  ? colorScheme1[3] :
+             colorScheme1[4]
+    }
+
+    function style(feature) {
+      return {
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '2',
+        fillOpacity: 0.7,
+        fillColor: getColor(feature.properties.TotalPopulation)
+      };
+    } 
+      
+    function highlightFeature(e) {
+      var layer = e.target;
+
+      layer.setStyle({
+        weight: 2,
+        color: '#ef3b2c',
+        dashArray: '',
+        fillOpacity: 1
+      });
+
+      if (!L.Browser.ie && !L.Browser.opera) {
+        layer.bringToFront();
+      }
+
+      info.update(layer.feature.properties);
+    }
+
+    function resetHighlight(e) {
+      subzoneJSON.resetStyle(e.target);
+      info.update();
+    }
+
+    function zoomToFeature(e) {
+      map.fitBounds(e.target.getBounds());
+    }
+
+    var subzoneLyr = L.layerGroup();
+    $.getJSON("./data/subzone2.geojson", function(data) {
+      subzoneJSON = L.geoJson(data,{
+        style : style,
+        onEachFeature: function(feature, layer) {
+          layer.on({
+            mouseover: highlightFeature,
+            mouseout: resetHighlight,
+            click: zoomToFeature
+          });
+        }
+      });
+      subzoneLyr.addLayer(subzoneJSON);
+    });
+
+
+    var legendSubzone = L.control({position: 'bottomright'});
+
+    legendSubzone.onAdd = function (map) {
+
+      var div = L.DomUtil.create('div', 'info legend'),
+        grades = colorArray,
+        labels = [],
+        from, to;
+
+      div.innerHTML += '<b>Subzone Population</b><br>';
+
+      for (var i = 0; i < grades.length; i++) {
+        from = grades[i];
+        to = grades[i + 1];
+
+        labels.push(
+          '<i style="background:' + getColor(from + 1) + '"></i> ' +
+          from + (to ? ' &ndash; ' + to : '+'));
+      }
+
+      div.innerHTML += labels.join('<br>');
+      return div;
+    };
+
+
+    /**********************
+        Subzone 
+    ***********************/
+
+
+    var baseMaps = {"Data View":dataview, "Open Street Map ": openstreetmap};
+    var overlayMaps = {"Subzone": subzoneLyr, "Cervical Centres" : cervicalLayer};
+    L.control.layers(baseMaps, overlayMaps).addTo(map);
+    
+
+    map.on('overlayremove', function (e) {
+        if (e.name == "Subzone") {
+            this.removeControl(legendSubzone);
+            this.removeControl(info);
+        }
+    });
+    map.on('overlayadd', function (e) {
+        if (e.name == "Subzone") {
+            this.addControl(legendSubzone);
+            this.addControl(info);
+        }
+    });
+
+  </script>
+</body>
+</html>
+	
